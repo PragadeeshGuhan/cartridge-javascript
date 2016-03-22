@@ -4,10 +4,12 @@
 
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
-		someProperty: "a value",
-		src:          projectConfig.paths.src.base + 'module-thing.ext',
+		jshint: {
+
+		},
+		src:          projectConfig.paths.src.base + '**/*.js',
 		watch:        [
-			projectConfig.paths.src.components + '**/*.ext'
+			projectConfig.paths.src.components + '**/*.js'
 		]
 	};
 
