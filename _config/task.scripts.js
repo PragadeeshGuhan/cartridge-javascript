@@ -71,6 +71,7 @@ function getTaskConfig(projectConfig) {
 			}
 		},
 		src: projectConfig.paths.src.base + '**/*.js',
+		docs: projectConfig.paths.src.base + 'docs/jsdocs',
 		watch: [
 			projectConfig.paths.src.components + '**/*.js'
 		]

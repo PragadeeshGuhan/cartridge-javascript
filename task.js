@@ -11,6 +11,7 @@ var path = require('path');
 // Module dependencies
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
+var jsdoc = require('gulp-jsdoc');
 
 module.exports = function(gulp, projectConfig, tasks) {
 
@@ -27,12 +28,24 @@ module.exports = function(gulp, projectConfig, tasks) {
 	*	MODULE TASKS
 	* ---------------------*/
 
+	gulp.task(TASK_NAME, function () {
+		return gulp.src(taskConfig.src)
+
+			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
+	});
+
 	gulp.task(TASK_NAME + ':lint', function () {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!argv.prod, jshint(jshintConfig))) //Default only
 			.pipe(gulpif(!argv.prod, jshint.reporter(stylish))); //Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
+
+	gulp.task(TASK_NAME + ':docs', function () {
+		return gulp.src(taskConfig.src)
+			.pipe(gulpif(!argv.prod, jsdoc(taskConfig.docs))); // Default only
+	});
+
 
 	/* --------------------
 	*	WATCH TASKS
