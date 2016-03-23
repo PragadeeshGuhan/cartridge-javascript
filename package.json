@@ -1,31 +1,35 @@
 {
-	"name": "cartridge-javascript",
-	"version": "0.0.1",
-	"description": "JavaScript module for the cartridge project",
-	"keywords": [
-		"gulp",
-		"dependency",
-		"cartridge",
-		"cartridge-module",
-		"cartridge-task",
-		"javascript"
-	],
-	"homepage": "https://github.com/cartridge/cartridge-javascript",
-	"bugs": {
-		"url": "https://github.com/cartridge/cartridge-javascript/issues"
-	},
-	"license": "MIT",
-	"author": "Code Computerlove <npm@codecomputerlove.co.uk>",
-	"main": "task.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/cartridge/cartridge-javascript.git"
-	},
-	"scripts": {
-		"postinstall": "node scripts/postinstall.js",
-		"preuninstall": "node scripts/preuninstall.js"
-	},
-	"dependencies": {
-		"cartridge-module-util": "~0.1.1"
-	}
+  "name": "cartridge-javascript",
+  "version": "0.0.1",
+  "description": "JavaScript module for the cartridge project",
+  "keywords": [
+    "gulp",
+    "dependency",
+    "cartridge",
+    "cartridge-module",
+    "cartridge-task",
+    "javascript"
+  ],
+  "homepage": "https://github.com/cartridge/cartridge-javascript",
+  "bugs": {
+    "url": "https://github.com/cartridge/cartridge-javascript/issues"
+  },
+  "license": "MIT",
+  "author": "Code Computerlove <npm@codecomputerlove.co.uk>",
+  "main": "task.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cartridge/cartridge-javascript.git"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "preuninstall": "node scripts/preuninstall.js"
+  },
+  "dependencies": {
+    "cartridge-module-util": "~0.1.1",
+    "gulp-if": "^2.0.0",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
+  }
 }

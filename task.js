@@ -5,12 +5,12 @@
 \* ============================================================ */
 
 // Gulp dependencies
-var gulpif     = require('gulp-if')
+var gulpif = require('gulp-if')
 var path = require('path');
 
 // Module dependencies
-var jshint   = require('gulp-jshint');
-var stylish  = require('jshint-stylish');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 
 module.exports = function(gulp, projectConfig, tasks) {
 
