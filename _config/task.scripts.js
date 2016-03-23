@@ -2,6 +2,10 @@
 
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
+		bundle: 'bundle.js',
+		docs: projectConfig.paths.src.base + 'docs/jsdocs',
+		src: projectConfig.paths.src.base + '**/*.js',
+
 		jshint: {
 			"bitwise"       : true,
 			"camelcase"     : true,
@@ -70,8 +74,6 @@ function getTaskConfig(projectConfig) {
 				"XMLHttpRequest": true
 			}
 		},
-		src: projectConfig.paths.src.base + '**/*.js',
-		docs: projectConfig.paths.src.base + 'docs/jsdocs',
 		watch: [
 			projectConfig.paths.src.components + '**/*.js'
 		]

@@ -5,13 +5,16 @@
 \* ============================================================ */
 
 // Gulp dependencies
+var concat     = require('gulp-concat');
 var gulpif = require('gulp-if')
 var path = require('path');
+var sourcemaps = require('gulp-sourcemaps');
 
 // Module dependencies
 var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
 var jsdoc = require('gulp-jsdoc');
+var stylish = require('jshint-stylish');
+var uglify   = require('gulp-uglify');
 
 module.exports = function(gulp, projectConfig, tasks) {
 
@@ -30,14 +33,17 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 	gulp.task(TASK_NAME, function () {
 		return gulp.src(taskConfig.src)
-
+			.pipe(gulpif(!argv.prod, sourcemaps.init())) // Default only
+			.pipe(concat(taskConfig.bundle))
+			.pipe(gulpif(argv.prod, uglify())) // Production only
+			.pipe(gulpif(!argv.prod, sourcemaps.write('.'))) // Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
 
 	gulp.task(TASK_NAME + ':lint', function () {
 		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!argv.prod, jshint(jshintConfig))) //Default only
-			.pipe(gulpif(!argv.prod, jshint.reporter(stylish))); //Default only
+			.pipe(gulpif(!argv.prod, jshint(jshintConfig))) // Default only
+			.pipe(gulpif(!argv.prod, jshint.reporter(stylish))); // Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
 
