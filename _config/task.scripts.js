@@ -3,8 +3,8 @@
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
 		bundle: 'bundle.js',
-		docs: projectConfig.paths.src.base + 'docs/jsdocs',
-		src: projectConfig.paths.src.base + '**/*.js',
+		docs: 'docs/jsdocs',
+		src: projectConfig.paths.src.scripts + '**/*.js',
 
 		jshint: {
 			"bitwise"       : true,
@@ -75,7 +75,7 @@ function getTaskConfig(projectConfig) {
 			}
 		},
 		watch: [
-			projectConfig.paths.src.components + '**/*.js'
+			projectConfig.paths.src.scripts + '**/*.js'
 		]
 	};
 
