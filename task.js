@@ -42,7 +42,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 	gulp.task(TASK_NAME + ':lint', function () {
 		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!projectConfig.isProd, jshint(jshintConfig))) // Default only
+			.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
 			.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
