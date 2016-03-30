@@ -7,7 +7,7 @@ var packageConfig = require('../package.json');
 var cartridgeUtil = require('cartridge-module-util')(packageConfig);
 var path          = require('path');
 
-var TASK_NAME = 'javascript';
+var TASK_NAME = 'scripts';
 
 // Transform function for adding paths
 function projectConfigAddPaths(config) {

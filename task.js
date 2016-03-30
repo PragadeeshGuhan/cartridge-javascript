@@ -33,23 +33,23 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 	gulp.task(TASK_NAME, function () {
 		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!argv.prod, sourcemaps.init())) // Default only
+			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
 			.pipe(concat(taskConfig.bundle))
-			.pipe(gulpif(argv.prod, uglify())) // Production only
-			.pipe(gulpif(!argv.prod, sourcemaps.write('.'))) // Default only
+			.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
+			.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
 
 	gulp.task(TASK_NAME + ':lint', function () {
 		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!argv.prod, jshint(jshintConfig))) // Default only
-			.pipe(gulpif(!argv.prod, jshint.reporter(stylish))); // Default only
+			.pipe(gulpif(!projectConfig.isProd, jshint(jshintConfig))) // Default only
+			.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
 			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
 
 	gulp.task(TASK_NAME + ':docs', function () {
 		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!argv.prod, jsdoc(taskConfig.docs))); // Default only
+			.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
 	});
 
 
