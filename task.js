@@ -31,7 +31,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 	*	MODULE TASKS
 	* ---------------------*/
 
-	gulp.task(TASK_NAME, function () {
+	gulp.task(TASK_NAME + ':bundle', function () {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
 			.pipe(concat(taskConfig.bundle))
@@ -44,7 +44,6 @@ module.exports = function(gulp, projectConfig, tasks) {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
 			.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
-			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 	});
 
 	gulp.task(TASK_NAME + ':docs', function () {
@@ -52,6 +51,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 			.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
 	});
 
+	gulp.task(TASK_NAME, [TASK_NAME + ':lint', TASK_NAME + ':bundle', TASK_NAME + ':docs']);
 
 	/* --------------------
 	*	WATCH TASKS
