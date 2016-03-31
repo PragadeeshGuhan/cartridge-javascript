@@ -8,6 +8,7 @@ var gulp   = require('gulp');
 // Node
 var path = require('path');
 var fs   = require('fs');
+var argv   = require('yargs').argv;
 
 // Tasks
 var tasks         = {};
@@ -21,7 +22,7 @@ var config        = require('./_config/project.json');
 config.cleanPaths = [];
 config.creds      = require('./_config/creds.json');
 
-config.isProd     = false;
+config.isProd     = argv.prod || false;
 config.isWatched  = false;
 
 require(path.resolve('..', '..', 'task.js'))(gulp, config, tasks);
