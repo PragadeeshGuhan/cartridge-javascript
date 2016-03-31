@@ -14,8 +14,9 @@ install:
     - cd ../..
     - npm install mocha -g
     - npm install gulp-cli -g
-cache:
+script:
     - mocha
+cache:
   directories:
     - node_modules
     - test/mock-project/node_modules
