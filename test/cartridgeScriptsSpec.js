@@ -28,16 +28,6 @@ function runGulpTask(options, callback) {
 
     var gulp = spawn('gulp', options)
 
-    gulp.stdout.on('data', function (data) {
-    	var buffer =  new Buffer(data);
-
-	    console.log(buffer.toString('utf8'));
-	});
-
-	gulp.stderr.on('data', function (data) {
-	    console.log(data);
-	});
-
     gulp.on('close', function() {
         callback();
     });
