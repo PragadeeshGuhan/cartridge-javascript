@@ -46,11 +46,11 @@ describe('As a user of the cartridge-sass module', function() {
 			cleanUp();
 		})
 
-		it('should generate the main.scss file in the _source dir', function() {
+		it('should generate the bundle.js file in the _source dir', function() {
 			expect(MAIN_JS_FILEPATH).to.be.a.file();
 		})
 
-		it('should add the main.css.map sourcemap file to the public styles folder', function() {
+		it('should add the bundle.js.map sourcemap file to the public styles folder', function() {
 			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.be.a.file();
 		})
 
@@ -66,12 +66,12 @@ describe('As a user of the cartridge-sass module', function() {
 			cleanUp();
 		})
 
-		it('should generate the main.scss file in the _source dir', function() {
+		it('should generate the bundle.js file in the _source dir', function() {
 			expect(MAIN_JS_FILEPATH).to.be.a.file();
 		})
 
-		it('should add the main.css.map sourcemap file to the public styles folder', function() {
-			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.be.a.file();
+		it('should not add the bundle.js.map sourcemap file to the public styles folder', function() {
+			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.not.be.a.file();
 		})
 
 	})

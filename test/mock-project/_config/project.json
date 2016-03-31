@@ -7,10 +7,10 @@
   },
   "paths": {
     "src": {
-      "sass": "_source/styles/"
+      "scripts": "_source/scripts/"
     },
     "dest": {
-      "sass": "public/_client/styles/"
+      "scripts": "public/_client/scripts/"
     }
   }
 }
