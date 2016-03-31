@@ -13,7 +13,7 @@ This module adds the following to a project:
 * JavaScript [concatination](https://github.com/contra/gulp-concat) and [minification](https://github.com/terinjokes/gulp-uglify)
 * JavaScript [sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
 * JavaScript linting using [gulp-jshint](https://github.com/spalger/gulp-jshint)
-* JavaScript documentation generation using [gulp-jsdoc](https://github.com/jsBoot/gulp-jsdoc)
+* JavaScript documentation generation using [gulp-jsdoc3](https://github.com/mlucool/gulp-jsdoc3)
 
 ## Config
 
