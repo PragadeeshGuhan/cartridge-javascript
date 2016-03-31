@@ -14,12 +14,14 @@ var STYLE_DEST_DIR = path.join(MOCK_PROJECT_DIR, 'public', '_client', 'scripts')
 
 var MAIN_JS_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js');
 var MAIN_JS_SOURCEMAP_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js.map');
+var JS_DOCS_PATH = path.join(MOCK_PROJECT_DIR, 'docs');
 
 process.chdir(MOCK_PROJECT_DIR);
 
 function cleanUp() {
 	fs.remove(MAIN_JS_FILEPATH);
 	fs.remove(MAIN_JS_SOURCEMAP_FILEPATH);
+	fs.remove(JS_DOCS_PATH);
 }
 
 function runGulpTask(options, callback) {
@@ -52,6 +54,10 @@ describe('As a user of the cartridge-sass module', function() {
 
 		it('should add the bundle.js.map sourcemap file to the public styles folder', function() {
 			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.be.a.file();
+		})
+
+		it('should generate the docs folder in the root of the project', function() {
+			expect(JS_DOCS_PATH).to.be.a.directory();
 		})
 
 	})
