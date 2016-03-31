@@ -34,7 +34,7 @@ function runGulpTask(options, callback) {
 
 }
 
-describe('As a user of the cartridge-sass module', function() {
+describe('As a user of the cartridge-javascript module', function() {
 
 	this.timeout(10000);
 
