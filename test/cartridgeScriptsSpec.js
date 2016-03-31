@@ -53,11 +53,11 @@ describe('As a user of the cartridge-sass module', function() {
 		})
 
 		it('should add the bundle.js.map sourcemap file to the public styles folder', function() {
-			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.be.a.file();
+			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.be.a.path();
 		})
 
 		it('should generate the docs folder in the root of the project', function() {
-			expect(JS_DOCS_PATH).to.be.a.directory();
+			expect(JS_DOCS_PATH).to.be.a.path();
 		})
 
 	})
@@ -74,6 +74,14 @@ describe('As a user of the cartridge-sass module', function() {
 
 		it('should add the bundle.js file to the public scripts folder', function() {
 			expect(MAIN_JS_FILEPATH).to.be.a.file();
+		})
+
+		it('should not add the bundle.js.map sourcemap file to the public styles folder', function() {
+			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.not.be.a.path();
+		})
+
+		it('should not generate the docs folder in the root of the project', function() {
+			expect(JS_DOCS_PATH).to.not.be.a.path();
 		})
 
 	})
