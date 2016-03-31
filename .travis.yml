@@ -6,10 +6,14 @@ node_js:
 install:
     - export NODE_ENV=development
     - npm install
+    - rm -rf node_modules/gulp-jsdoc
+    - npm install gulp-jsdoc
     - cp _config/task.scripts.js test/mock-project/_config/task.scripts.js
     - cp package.json test/mock-project/package.json
     - cd test/mock-project
     - npm install
+    - rm -rf node_modules/gulp-jsdoc
+    - npm install gulp-jsdoc
     - npm install gulp
     # - cd ../..
     - npm install mocha -g
