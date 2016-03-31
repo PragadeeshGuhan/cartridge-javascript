@@ -12,7 +12,7 @@ var MOCK_PROJECT_DIR = path.join(process.cwd(), 'test', 'mock-project');
 var STYLE_SRC_DIR = path.join(MOCK_PROJECT_DIR, '_source', 'scripts');
 var STYLE_DEST_DIR = path.join(MOCK_PROJECT_DIR, 'public', '_client', 'scripts');
 
-var MAIN_JS_FILEPATH = path.join(STYLE_SRC_DIR, 'bundle.js');
+var MAIN_JS_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js');
 var MAIN_JS_SOURCEMAP_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js.map');
 
 process.chdir(MOCK_PROJECT_DIR);
@@ -46,7 +46,7 @@ describe('As a user of the cartridge-sass module', function() {
 			cleanUp();
 		})
 
-		it('should generate the bundle.js file in the _source dir', function() {
+		it('should add the bundle.js file to the public scripts folder', function() {
 			expect(MAIN_JS_FILEPATH).to.be.a.file();
 		})
 
@@ -59,19 +59,15 @@ describe('As a user of the cartridge-sass module', function() {
 	describe('when `gulp scripts` is run WITH production flag', function() {
 
 		before(function(done) {
-			runGulpTask(['sass', '--prod'], done)
+			runGulpTask(['scripts', '--prod'], done)
 		})
 
 		after(function() {
 			cleanUp();
 		})
 
-		it('should generate the bundle.js file in the _source dir', function() {
+		it('should add the bundle.js file to the public scripts folder', function() {
 			expect(MAIN_JS_FILEPATH).to.be.a.file();
-		})
-
-		it('should not add the bundle.js.map sourcemap file to the public styles folder', function() {
-			expect(MAIN_JS_SOURCEMAP_FILEPATH).to.not.be.a.file();
 		})
 
 	})
