@@ -12,7 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 // Module dependencies
 var jshint = require('gulp-jshint');
-var jsdoc = require('gulp-jsdoc');
+var jsdoc = require('gulp-jsdoc3');
 var stylish = require('jshint-stylish');
 var uglify   = require('gulp-uglify');
 

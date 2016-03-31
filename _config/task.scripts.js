@@ -3,7 +3,11 @@
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
 		bundle: 'bundle.js',
-		docs: 'docs/jsdocs',
+		docs: {
+		  "opts": {
+			"destination": "./docs/gen"
+		  }
+		},
 		src: projectConfig.paths.src.scripts + '**/*.js',
 
 		jshint: {
