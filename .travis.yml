@@ -15,12 +15,11 @@ install:
     - rm -rf node_modules/gulp-jsdoc
     - npm install gulp-jsdoc
     - npm install gulp
-    # - cd ../..
+    - cd ../..
     - npm install mocha -g
     - npm install gulp-cli -g
 script:
-    # - mocha
-    - gulp scripts
+    - mocha
 cache:
   directories:
     - node_modules
