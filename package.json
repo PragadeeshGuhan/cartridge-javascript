@@ -26,7 +26,7 @@
     "preuninstall": "node scripts/preuninstall.js"
   },
   "dependencies": {
-    "cartridge-module-util": "~0.2.1",
+    "cartridge-module-util": "~0.3.0",
     "gulp-concat": "^2.6.0",
     "gulp-if": "^2.0.0",
     "gulp-jsdoc3": "^0.2.1",
