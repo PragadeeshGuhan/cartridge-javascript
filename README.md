@@ -15,6 +15,12 @@ This module adds the following to a project:
 * JavaScript linting using [gulp-jshint](https://github.com/spalger/gulp-jshint)
 * JavaScript documentation generation using [gulp-jsdoc3](https://github.com/mlucool/gulp-jsdoc3)
 
+## Maintainers
+
+| Name          | Github Profile                  |
+| ------------- |---------------------------------|
+| Tristan Ashley  | [tawashley](https://github.com/tawashley) |
+
 ## Config
 
 Once installed, the config file `task.scripts.js` is created and stored in the `_config` directory in the root of your cartridge project.
