@@ -10,16 +10,17 @@ npm install cartridge-javascript --save-dev
 
 This module adds the following to a project:
 
-* JavaScript [concatination](https://github.com/contra/gulp-concat) and [minification](https://github.com/terinjokes/gulp-uglify)
+* JavaScript [concatenation](https://github.com/contra/gulp-concat) and [minification](https://github.com/terinjokes/gulp-uglify)
 * JavaScript [sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
 * JavaScript linting using [gulp-jshint](https://github.com/spalger/gulp-jshint)
 * JavaScript documentation generation using [gulp-jsdoc3](https://github.com/mlucool/gulp-jsdoc3)
 
 ## Maintainers
 
-| Name          | Github Profile                  |
-| ------------- |---------------------------------|
-| Tristan Ashley  | [tawashley](https://github.com/tawashley) |
+| Name          |                   
+| ------------- |
+| [Daniel Furze](https://github.com/furzeface)  
+| [Tristan Ashley](https://github.com/tawashley) 
 
 ## Config
 
