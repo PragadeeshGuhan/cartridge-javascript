@@ -8,7 +8,10 @@ function getTaskConfig(projectConfig) {
 			"destination": "./docs/gen"
 		  }
 		},
-		src: projectConfig.paths.src.scripts + '**/*.js',
+		src: [
+			projectConfig.paths.src.scripts + '**/*.js',
+			projectConfig.paths.src.components + '**/*.js'
+		],
 
 		jshint: {
 			"bitwise"       : true,
