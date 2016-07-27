@@ -9,6 +9,7 @@ var concat     = require('gulp-concat');
 var gulpif = require('gulp-if')
 var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
+var babel = require("gulp-babel");
 
 // Module dependencies
 var jshint = require('gulp-jshint');

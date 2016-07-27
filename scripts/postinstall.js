@@ -29,4 +29,7 @@ cartridgeUtil.addToRc()
 	.then(function(){
 		return cartridgeUtil.addModuleConfig(path.resolve('_config', 'task.' + TASK_NAME + '.js'));
 	})
+	.then(function() {
+		return cartridgeUtil.copyFileToProject('.babelrc');
+	})
 	.then(cartridgeUtil.finishInstall);
