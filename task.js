@@ -34,6 +34,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 	gulp.task(TASK_NAME + ':bundle', function () {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
+			.pipe(gulpif(taskConfig.es2015, babel()))
 			.pipe(concat(taskConfig.bundle))
 			.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
