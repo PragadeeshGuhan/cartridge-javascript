@@ -57,7 +57,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 	gulp.task(TASK_NAME + ':ensure-babel-symlink', function (done) {
 		if(taskConfig.useBabel) {
-			helpers.symlinkBabelDirectories(taskConfig.useBabel);
+			helpers.symlinkBabelDirectories();
 		}
 
 		done();
