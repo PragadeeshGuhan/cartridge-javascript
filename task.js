@@ -17,6 +17,8 @@ var jsdoc = require('gulp-jsdoc3');
 var stylish = require('jshint-stylish');
 var uglify   = require('gulp-uglify');
 
+var helpers = require('./helpers');
+
 module.exports = function(gulp, projectConfig, tasks) {
 
 	/* --------------------
@@ -32,10 +34,10 @@ module.exports = function(gulp, projectConfig, tasks) {
 	*	MODULE TASKS
 	* ---------------------*/
 
-	gulp.task(TASK_NAME + ':bundle', function () {
+	gulp.task(TASK_NAME + ':bundle', [ TASK_NAME + ':ensure-babel-symlink'], function () {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
-			.pipe(gulpif(taskConfig.es2015, babel()))
+			.pipe(gulpif(taskConfig.useBabel, babel()))
 			.pipe(concat(taskConfig.bundle))
 			.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
@@ -52,6 +54,15 @@ module.exports = function(gulp, projectConfig, tasks) {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
 	});
+
+	gulp.task(TASK_NAME + ':ensure-babel-symlink', function (done) {
+		if(taskConfig.useBabel) {
+			helpers.symlinkBabelDirectories(taskConfig.useBabel);
+		}
+
+		done();
+	});
+
 
 	gulp.task(TASK_NAME, [TASK_NAME + ':lint', TASK_NAME + ':bundle', TASK_NAME + ':docs']);
 
