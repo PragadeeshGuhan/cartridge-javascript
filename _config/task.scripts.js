@@ -2,16 +2,21 @@
 
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
-		bundle: 'bundle.js',
+		files: {
+			bundle: [
+				projectConfig.paths.src.scripts + '**/*.js',
+				projectConfig.paths.src.components + '**/*.js'
+			],
+			bundle2: [
+				projectConfig.paths.src.scripts + '**/*.js',
+				projectConfig.paths.src.components + '**/*.js'
+			],
+		},
 		docs: {
 		  "opts": {
-			"destination": "./docs/gen"
+				"destination": "./docs/gen"
 		  }
 		},
-		src: [
-			projectConfig.paths.src.scripts + '**/*.js',
-			projectConfig.paths.src.components + '**/*.js'
-		],
 		useBabel: false,
 		jshint: {
 			"bitwise"       : true,
