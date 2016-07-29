@@ -5,12 +5,12 @@ function getTaskConfig(projectConfig) {
 		files: {
 			bundle: [
 				projectConfig.paths.src.scripts + '**/*.js',
-				projectConfig.paths.src.components + '**/*.js'
+				projectConfig.paths.src.components + '**/*.js',
+				'!' + projectConfig.paths.src.scripts + 'vendor/*.js'
 			],
-			bundle2: [
-				projectConfig.paths.src.scripts + '**/*.js',
-				projectConfig.paths.src.components + '**/*.js'
-			],
+			vendor: [
+				projectConfig.paths.src.scripts + 'vendor/*.js'
+			]
 		},
 		docs: {
 		  "opts": {
