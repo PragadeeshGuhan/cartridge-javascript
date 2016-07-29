@@ -40,7 +40,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 		helpers.symlinkBabelDirectories();
 	}
 
-	Object.keys(taskConfig.files).forEach(function(key) {
+	Object.keys(taskConfig.files).forEach(function generateTasks(key) {
 
 		var bundleTaskName = TASK_NAME + ':concat:' + key;
 		var lintTaskName = TASK_NAME + ':lint:' + key;
@@ -68,37 +68,8 @@ module.exports = function(gulp, projectConfig, tasks) {
 		})
 
 		scriptTasks.push(bundleTaskName, lintTaskName, docTaskName);
+
 	});
-
-	// gulp.task(TASK_NAME + ':bundle', [ TASK_NAME + ':ensure-babel-symlink'], function () {
-		// return gulp.src(taskConfig.src)
-		// 	.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
-		// 	.pipe(gulpif(taskConfig.useBabel, babel()))
-		// 	.pipe(concat(taskConfig.bundle))
-		// 	.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
-		// 	.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
-		// 	.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
-	// });
-	//
-	// gulp.task(TASK_NAME + ':lint', function () {
-		// return gulp.src(taskConfig.src)
-		// 	.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
-		// 	.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
-	// });
-	//
-	// gulp.task(TASK_NAME + ':docs', function () {
-		// return gulp.src(taskConfig.src)
-		// 	.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
-	// });
-	//
-	// gulp.task(TASK_NAME + ':ensure-babel-symlink', function (done) {
-		// if(taskConfig.useBabel) {
-		// 	helpers.symlinkBabelDirectories();
-		// }
-	//
-	// 	done();
-	// });
-
 
 	gulp.task(TASK_NAME, scriptTasks);
 
