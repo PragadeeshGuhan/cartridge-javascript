@@ -12,7 +12,7 @@ function getTaskConfig(projectConfig) {
 			projectConfig.paths.src.scripts + '**/*.js',
 			projectConfig.paths.src.components + '**/*.js'
 		],
-
+		useBabel: false,
 		jshint: {
 			"bitwise"       : true,
 			"camelcase"     : true,
