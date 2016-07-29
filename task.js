@@ -42,7 +42,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 	Object.keys(taskConfig.files).forEach(function generateTasks(key) {
 
-		var bundleTaskName = TASK_NAME + ':concat:' + key;
+		var bundleTaskName = TASK_NAME + ':bundle:' + key;
 		var lintTaskName = TASK_NAME + ':lint:' + key;
 		var docTaskName = TASK_NAME + ':docs:' + key;
 
