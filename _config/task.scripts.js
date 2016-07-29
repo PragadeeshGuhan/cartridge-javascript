@@ -2,6 +2,7 @@
 
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
+		useBabel: false,
 		files: {
 			bundle: [
 				projectConfig.paths.src.scripts + '**/*.js',
@@ -17,7 +18,6 @@ function getTaskConfig(projectConfig) {
 				"destination": "./docs/gen"
 		  }
 		},
-		useBabel: false,
 		jshint: {
 			"bitwise"       : true,
 			"camelcase"     : true,
