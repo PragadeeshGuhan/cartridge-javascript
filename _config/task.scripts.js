@@ -4,14 +4,19 @@ function getTaskConfig(projectConfig) {
 	var taskConfig = {
 		useBabel: false,
 		files: {
-			bundle: [
-				projectConfig.paths.src.scripts + '**/*.js',
-				projectConfig.paths.src.components + '**/*.js',
-				'!' + projectConfig.paths.src.scripts + 'vendor/*.js'
-			],
-			vendor: [
-				projectConfig.paths.src.scripts + 'vendor/*.js'
-			]
+			bundle: {
+				src: [
+					projectConfig.paths.src.scripts + '**/*.js',
+					projectConfig.paths.src.components + '**/*.js',
+					'!' + projectConfig.paths.src.scripts + 'vendor/*.js'
+				]
+			},
+			vendor: {
+				generateDocs: false,
+				src: [
+					projectConfig.paths.src.scripts + 'vendor/*.js'
+				]
+			}
 		},
 		docs: {
 		  "opts": {
