@@ -31,6 +31,45 @@ module.exports = function(gulp, projectConfig, tasks) {
 	*	MODULE TASKS
 	* ---------------------*/
 
+	Object.keys(taskConfig.files).forEach(function(key) {
+
+		var bundleTaskName = TASK_NAME + ':bundle:' + key;
+		var lintTaskName = TASK_NAME + ':lint:' + key;
+		var docTaskName = TASK_NAME + ':docs:' + key;
+
+		gulp.task(bundleTaskName, function() {
+			return gulp.src(taskConfig.files[key])
+				.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
+				.pipe(concat(key + '.js'))
+				.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
+				.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
+				.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
+		})
+	// var generateContentsTaskName = TASK_NAME + ':generate-contents:' + key;
+	// var sassCompileTaskName = TASK_NAME + ':' + key;
+	//
+	// gulp.task(generateContentsTaskName, function () {
+	// 	return gulp.src(taskConfig.files[key].partials)
+	// 		.pipe(sgc(taskConfig.files[key].src, projectConfig.creds))
+	// 		.pipe(gulp.dest(projectConfig.paths.src[TASK_NAME]));
+	// });
+	//
+	// gulp.task(sassCompileTaskName, [generateContentsTaskName], function () {
+	// 	return gulp.src(taskConfig.files[key].src)
+	// 		.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) //Default only
+	// 		.pipe(sass({
+	// 			errLogToConsole: true,
+	// 			includePaths:    [projectConfig.paths.src.components],
+	// 			outputStyle:     'compact'
+	// 		}))
+	// 		.pipe(postcss(getPostCssPlugins(taskConfig.files[key].config)))
+	// 		.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) //Default only
+	// 		.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
+	// });
+	//
+	// sassTasksArr.push(sassCompileTaskName);
+	});
+
 	gulp.task(TASK_NAME + ':bundle', function () {
 		return gulp.src(taskConfig.src)
 			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
