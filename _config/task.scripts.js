@@ -4,7 +4,7 @@ function getTaskConfig(projectConfig) {
 	var taskConfig = {
 		useBabel: false,
 		files: {
-			bundle: {
+			main: {
 				src: [
 					projectConfig.paths.src.scripts + '**/*.js',
 					projectConfig.paths.src.components + '**/*.js',
