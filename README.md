@@ -29,7 +29,13 @@ Once installed, the config file `task.scripts.js` is created and stored in the `
 
 Multiple files can be independently managed using the `files` object, allowing separate files to be compiled e.g. `vendor.js` and `bundle.js`.
 
-Each key represents the name of the output file (a key of `bundle` will make the output file of `bundle.js`) with the `src` array specifying what files are to be included. The option `generateDocs` can be set to `false` to turn off generating documentation if this is not needed e.g working with 3rd party libraries.
+Each key represents the name of the output file (a key of `bundle` will make the output file of `bundle.js`) with the `src` array specifying what files are to be included.
+
+### Options
+The following options can be set for each file set to change functionality
+
+* `generateDocs` boolean can be changed to turn off generating documentation if this is not needed e.g working with 3rd party libraries. This option is on by default.
+* `lintFiles` boolean can be changed to turn off linting for certain files, if this is not needed e.g working with 3rd party libraries. This option is on by default.
 
 Any example of a two file setup is included in the base config file when the module is installed.
 
