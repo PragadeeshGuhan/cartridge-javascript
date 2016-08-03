@@ -62,6 +62,8 @@ module.exports = function(gulp, projectConfig, tasks) {
 				.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 		})
 
+		scriptTasks.push(bundleTaskName);
+
 		if(includeLintTask) {
 			gulp.task(lintTaskName, function() {
 				return gulp.src(taskConfig.files[key].src)
@@ -69,7 +71,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 					.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
 			})
 
-			scriptTasks.push(bundleTaskName, lintTaskName);
+			scriptTasks.push(lintTaskName);
 		}
 
 		if(includeDocsTask) {
