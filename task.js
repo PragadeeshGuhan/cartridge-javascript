@@ -45,8 +45,12 @@ module.exports = function(gulp, projectConfig, tasks) {
 		var bundleTaskName = TASK_NAME + ':bundle:' + key;
 		var lintTaskName = TASK_NAME + ':lint:' + key;
 		var docTaskName = TASK_NAME + ':docs:' + key;
+
 		var generateDocsConfig = taskConfig.files[key].generateDocs
-		var hasDocsTask = (typeof generateDocsConfig !== 'undefined') ? generateDocsConfig : true;
+		var includeDocsTask = (typeof generateDocsConfig !== 'undefined') ? generateDocsConfig : true;
+
+		var lintFilesConfig = taskConfig.files[key].lintFiles;
+		var includeLintTask = (typeof lintFilesConfig !== 'undefined') ? lintFilesConfig : true;
 
 		gulp.task(bundleTaskName, function() {
 			return gulp.src(taskConfig.files[key].src)
@@ -58,15 +62,17 @@ module.exports = function(gulp, projectConfig, tasks) {
 				.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 		})
 
-		gulp.task(lintTaskName, function() {
-			return gulp.src(taskConfig.files[key].src)
-				.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
-				.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
-		})
+		if(includeDocsTask) {
+			gulp.task(lintTaskName, function() {
+				return gulp.src(taskConfig.files[key].src)
+					.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
+					.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
+			})
 
-		scriptTasks.push(bundleTaskName, lintTaskName);
+			scriptTasks.push(bundleTaskName, lintTaskName);
+		}
 
-		if(hasDocsTask) {
+		if(includeDocsTask) {
 			gulp.task(docTaskName, function() {
 				return gulp.src(taskConfig.files[key].src)
 					.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only

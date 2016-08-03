@@ -13,6 +13,7 @@ function getTaskConfig(projectConfig) {
 			},
 			vendor: {
 				generateDocs: false,
+				lintFiles: false,
 				src: [
 					projectConfig.paths.src.scripts + 'vendor/*.js'
 				]
