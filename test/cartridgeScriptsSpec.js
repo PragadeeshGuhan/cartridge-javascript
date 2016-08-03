@@ -12,8 +12,8 @@ var MOCK_PROJECT_DIR = path.join(process.cwd(), 'test', 'mock-project');
 var STYLE_SRC_DIR = path.join(MOCK_PROJECT_DIR, '_source', 'scripts');
 var STYLE_DEST_DIR = path.join(MOCK_PROJECT_DIR, 'public', '_client', 'scripts');
 
-var MAIN_JS_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js');
-var MAIN_JS_SOURCEMAP_FILEPATH = path.join(STYLE_DEST_DIR, 'bundle.js.map');
+var MAIN_JS_FILEPATH = path.join(STYLE_DEST_DIR, 'main.js');
+var MAIN_JS_SOURCEMAP_FILEPATH = path.join(STYLE_DEST_DIR, 'main.js.map');
 var JS_DOCS_PATH = path.join(MOCK_PROJECT_DIR, 'docs');
 
 process.chdir(MOCK_PROJECT_DIR);
