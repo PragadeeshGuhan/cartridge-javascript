@@ -62,7 +62,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 				.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
 		})
 
-		if(includeDocsTask) {
+		if(includeLintTask) {
 			gulp.task(lintTaskName, function() {
 				return gulp.src(taskConfig.files[key].src)
 					.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
