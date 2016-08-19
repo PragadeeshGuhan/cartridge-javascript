@@ -30,41 +30,62 @@ module.exports = function(gulp, projectConfig, tasks) {
 	// Task Config
 	var taskConfig = require(path.resolve(process.cwd(), projectConfig.dirs.config, 'task.' + TASK_NAME + '.js'))(projectConfig);
 
+	var scriptTasks = [];
+
 	/* --------------------
 	*	MODULE TASKS
 	* ---------------------*/
 
-	gulp.task(TASK_NAME + ':bundle', [ TASK_NAME + ':ensure-babel-symlink'], function () {
-		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
-			.pipe(gulpif(taskConfig.useBabel, babel()))
-			.pipe(concat(taskConfig.bundle))
-			.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
-			.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
-			.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
-	});
+	if(taskConfig.useBabel) {
+		helpers.symlinkBabelDirectories();
+	}
 
-	gulp.task(TASK_NAME + ':lint', function () {
-		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
-			.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
-	});
+	Object.keys(taskConfig.files).forEach(function generateTasks(key) {
 
-	gulp.task(TASK_NAME + ':docs', function () {
-		return gulp.src(taskConfig.src)
-			.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
-	});
+		var bundleTaskName = TASK_NAME + ':bundle:' + key;
+		var lintTaskName = TASK_NAME + ':lint:' + key;
+		var docTaskName = TASK_NAME + ':docs:' + key;
 
-	gulp.task(TASK_NAME + ':ensure-babel-symlink', function (done) {
-		if(taskConfig.useBabel) {
-			helpers.symlinkBabelDirectories();
+		var generateDocsConfig = taskConfig.files[key].generateDocs
+		var includeDocsTask = (typeof generateDocsConfig !== 'undefined') ? generateDocsConfig : true;
+
+		var lintFilesConfig = taskConfig.files[key].lintFiles;
+		var includeLintTask = (typeof lintFilesConfig !== 'undefined') ? lintFilesConfig : true;
+
+		gulp.task(bundleTaskName, function() {
+			return gulp.src(taskConfig.files[key].src)
+				.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
+				.pipe(gulpif(taskConfig.useBabel, babel()))
+				.pipe(concat(key + '.js'))
+				.pipe(gulpif(projectConfig.isProd, uglify())) // Production only
+				.pipe(gulpif(!projectConfig.isProd, sourcemaps.write('.'))) // Default only
+				.pipe(gulp.dest(projectConfig.paths.dest[TASK_NAME]));
+		})
+
+		scriptTasks.push(bundleTaskName);
+
+		if(includeLintTask) {
+			gulp.task(lintTaskName, function() {
+				return gulp.src(taskConfig.files[key].src)
+					.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
+					.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
+			})
+
+			scriptTasks.push(lintTaskName);
 		}
 
-		done();
+		if(includeDocsTask) {
+			gulp.task(docTaskName, function() {
+				return gulp.src(taskConfig.files[key].src)
+					.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
+			})
+
+			scriptTasks.push(docTaskName);
+		}
+
 	});
 
-
-	gulp.task(TASK_NAME, [TASK_NAME + ':lint', TASK_NAME + ':bundle', TASK_NAME + ':docs']);
+	gulp.task(TASK_NAME, scriptTasks);
 
 	/* --------------------
 	*	WATCH TASKS
