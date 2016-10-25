@@ -16,8 +16,33 @@ var jshint = require('gulp-jshint');
 var jsdoc = require('gulp-jsdoc3');
 var stylish = require('jshint-stylish');
 var uglify   = require('gulp-uglify');
+var scantree = require('scantree');
 
 var helpers = require('./helpers');
+
+function getJsConfigFromScantree(directory) {
+	var i;
+	var excludes = [
+		/^(.+\.json)|(.+\.scss)|(.+\.hbs)|(.+\.txt)$/g,
+		/picturefill/i,
+		/lazysizes/i,
+		/.DS_STORE/i
+	];
+	var response = JSON.parse(scantree.scan({
+		dirs:       directory,
+		base_dir:   process.cwd(),
+		groups:     false,
+		recursive:  true,
+		full_paths: true,
+		excludes:   excludes,
+		ignore: {
+			invalid: false,
+			missing: false
+		}
+	}));
+
+	return response;
+}
 
 module.exports = function(gulp, projectConfig, tasks) {
 
@@ -51,9 +76,10 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 		var lintFilesConfig = taskConfig.files[key].lintFiles;
 		var includeLintTask = (typeof lintFilesConfig !== 'undefined') ? lintFilesConfig : true;
+		var srcFiles = (taskConfig.useScantree) ? getJsConfigFromScantree(taskConfig.files[key].src) : taskConfig.files[key].src;
 
 		gulp.task(bundleTaskName, function() {
-			return gulp.src(taskConfig.files[key].src)
+			return gulp.src(srcFiles)
 				.pipe(gulpif(!projectConfig.isProd, sourcemaps.init())) // Default only
 				.pipe(gulpif(taskConfig.useBabel, babel()))
 				.pipe(concat(key + '.js'))
@@ -66,7 +92,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 		if(includeLintTask) {
 			gulp.task(lintTaskName, function() {
-				return gulp.src(taskConfig.files[key].src)
+				return gulp.src(srcFiles)
 					.pipe(gulpif(!projectConfig.isProd, jshint(taskConfig.jshint))) // Default only
 					.pipe(gulpif(!projectConfig.isProd, jshint.reporter(stylish))) // Default only
 			})
@@ -76,7 +102,7 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 		if(includeDocsTask) {
 			gulp.task(docTaskName, function() {
-				return gulp.src(taskConfig.files[key].src)
+				return gulp.src(srcFiles)
 					.pipe(gulpif(!projectConfig.isProd, jsdoc(taskConfig.docs))); // Default only
 			})
 

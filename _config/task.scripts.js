@@ -3,6 +3,7 @@
 function getTaskConfig(projectConfig) {
 	var taskConfig = {
 		useBabel: false,
+		useScantree: false,
 		files: {
 			main: {
 				src: [
