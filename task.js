@@ -17,6 +17,7 @@ var jsdoc = require('gulp-jsdoc3');
 var stylish = require('jshint-stylish');
 var uglify   = require('gulp-uglify');
 var scantree = require('scantree');
+var globArray = require('glob-array');
 
 var helpers = require('./helpers');
 
@@ -28,8 +29,11 @@ function getJsConfigFromScantree(directory) {
 		/lazysizes/i,
 		/.DS_STORE/i
 	];
+
+	var files = globArray.sync(directory);
+
 	var response = JSON.parse(scantree.scan({
-		dirs:       directory,
+		files: files,
 		base_dir:   process.cwd(),
 		groups:     false,
 		recursive:  true,
