@@ -16,37 +16,8 @@ var jshint = require('gulp-jshint');
 var jsdoc = require('gulp-jsdoc3');
 var stylish = require('jshint-stylish');
 var uglify   = require('gulp-uglify');
-var scantree = require('scantree');
-var globArray = require('glob-array');
 
 var helpers = require('./helpers');
-
-function getJsConfigFromScantree(directory) {
-	var i;
-	var excludes = [
-		/^(.+\.json)|(.+\.scss)|(.+\.hbs)|(.+\.txt)$/g,
-		/picturefill/i,
-		/lazysizes/i,
-		/.DS_STORE/i
-	];
-
-	var files = globArray.sync(directory);
-
-	var response = JSON.parse(scantree.scan({
-		files: files,
-		base_dir:   process.cwd(),
-		groups:     false,
-		recursive:  true,
-		full_paths: true,
-		excludes:   excludes,
-		ignore: {
-			invalid: false,
-			missing: false
-		}
-	}));
-
-	return response;
-}
 
 module.exports = function(gulp, projectConfig, tasks) {
 
@@ -80,7 +51,8 @@ module.exports = function(gulp, projectConfig, tasks) {
 
 		var lintFilesConfig = taskConfig.files[key].lintFiles;
 		var includeLintTask = (typeof lintFilesConfig !== 'undefined') ? lintFilesConfig : true;
-		var srcFiles = (taskConfig.useScantree) ? getJsConfigFromScantree(taskConfig.files[key].src) : taskConfig.files[key].src;
+
+		var srcFiles = helpers.getSrcFiles(taskConfig.files[key].src, taskConfig.useScantree);
 
 		gulp.task(bundleTaskName, function() {
 			return gulp.src(srcFiles)
