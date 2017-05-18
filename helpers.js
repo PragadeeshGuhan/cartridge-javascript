@@ -18,11 +18,11 @@ function getJsConfigFromScantree(directory) {
 
 	var response = JSON.parse(scantree.scan({
 		files: files,
-		base_dir:   process.cwd(),
-		groups:     false,
-		recursive:  true,
+		base_dir: process.cwd(),
+		groups: false,
+		recursive: true,
 		full_paths: true,
-		excludes:   excludes,
+		excludes: excludes,
 		ignore: {
 			invalid: false,
 			missing: false
@@ -39,8 +39,8 @@ helpersApi.symlinkBabelDirectories = function() {
 	fs.ensureSymlinkSync(modulePath, projectPath, 'dir');
 }
 
-helpersApi.getSrcFiles = function(srcFiles, usingBabel) {
-	if(usingBabel) {
+helpersApi.getSrcFiles = function(srcFiles, usingScantree) {
+	if(usingScantree) {
 		return getJsConfigFromScantree(srcFiles);
 	} else {
 		return srcFiles;
