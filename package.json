@@ -26,6 +26,9 @@
     "preuninstall": "node scripts/preuninstall.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
+  "release": {
+    "branch": "master"
+  },
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
     "cartridge-module-util": "~0.5.1",
